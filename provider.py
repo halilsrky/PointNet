@@ -1,3 +1,20 @@
+def rotate_point_cloud_z(batch_data):
+    """ Z ekseninde rastgele döndürme (augmentasyon için).
+    batch_data: [B, N, 3] veya [B, N, C]
+    """
+    B, N, C = batch_data.shape
+    rotated_data = np.zeros(batch_data.shape, dtype=np.float32)
+    for k in range(B):
+        rotation_angle = np.random.uniform() * 2 * np.pi
+        cosval = np.cos(rotation_angle)
+        sinval = np.sin(rotation_angle)
+        rotation_matrix = np.array([[cosval, -sinval, 0],
+                                    [sinval,  cosval, 0],
+                                    [0,       0,      1]])
+        rotated_data[k, :, :3] = np.dot(batch_data[k, :, :3], rotation_matrix)
+        if C > 3:
+            rotated_data[k, :, 3:] = batch_data[k, :, 3:]
+    return rotated_data
 import os
 import numpy as np
 from tqdm import tqdm
@@ -65,13 +82,15 @@ class CustomPointDataset(Dataset):
         self.room_idxs = np.array(room_idxs)
         print(f'Totally {len(self.room_idxs)} samples in {split} set.')
 
+
     def __getitem__(self, idx):
         room_idx = self.room_idxs[idx]
         points = self.room_points[room_idx]  # N x 3
         labels = self.room_labels[room_idx]  # N
         N_points = points.shape[0]
 
-        while True:
+        max_try = 100
+        for try_idx in range(max_try):
             center = points[np.random.choice(N_points)]
             block_min = center[:2] - self.block_size / 2.0
             block_max = center[:2] + self.block_size / 2.0
@@ -84,11 +103,18 @@ class CustomPointDataset(Dataset):
 
             if point_idxs.size > 1024:
                 break
-
-        if point_idxs.size >= self.num_point:
-            selected_point_idxs = np.random.choice(point_idxs, self.num_point, replace=False)
         else:
+            # 100 denemede de yeterli nokta bulunamazsa, tüm noktaları kullan
+            point_idxs = np.arange(N_points)
+
+        # Eğer 1024'ten az nokta varsa, mevcut tüm noktaları kullan
+        if point_idxs.size < 1024:
             selected_point_idxs = np.random.choice(point_idxs, self.num_point, replace=True)
+        else:
+            if point_idxs.size >= self.num_point:
+                selected_point_idxs = np.random.choice(point_idxs, self.num_point, replace=False)
+            else:
+                selected_point_idxs = np.random.choice(point_idxs, self.num_point, replace=True)
 
         selected_points = points[selected_point_idxs, :]  # num_point x 3
         current_labels = labels[selected_point_idxs]
