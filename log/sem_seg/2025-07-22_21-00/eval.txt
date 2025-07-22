@@ -1,0 +1,42 @@
+2025-07-22 21:24:41,475 - Model - INFO - PARAMETER ...
+2025-07-22 21:24:41,475 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='2025-07-22_21-00', num_point=4096, num_votes=3, test_area=5, visual=False)
+2025-07-22 21:24:41,477 - Model - INFO - The number of test data is: 0
+2025-07-22 21:24:42,870 - Model - INFO - ---- EVALUATION ----
+2025-07-22 21:25:12,553 - Model - INFO - PARAMETER ...
+2025-07-22 21:25:12,553 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='2025-07-22_21-00', num_point=4096, num_votes=3, test_area=5, visual=False)
+2025-07-22 21:25:12,728 - Model - INFO - The number of test data is: 196
+2025-07-22 21:25:14,161 - Model - INFO - ---- EVALUATION ----
+2025-07-22 21:27:16,641 - Model - INFO - PARAMETER ...
+2025-07-22 21:27:16,641 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='2025-07-22_21-00', num_point=4096, num_votes=3, test_area=5, visual=False)
+2025-07-22 21:27:16,643 - Model - INFO - The number of test data is: 0
+2025-07-22 21:27:18,050 - Model - INFO - ---- EVALUATION ----
+2025-07-22 21:40:25,715 - Model - INFO - PARAMETER ...
+2025-07-22 21:40:25,715 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='2025-07-22_21-00', num_point=4096, num_votes=3, test_area=5, visual=False)
+2025-07-22 21:40:25,854 - Model - INFO - The number of test data is: 196
+2025-07-22 21:40:27,236 - Model - INFO - ---- EVALUATION ----
+2025-07-22 21:40:55,177 - Model - INFO - PARAMETER ...
+2025-07-22 21:40:55,177 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='2025-07-22_21-00', num_point=4096, num_votes=3, test_area=5, visual=False)
+2025-07-22 21:40:55,320 - Model - INFO - The number of test data is: 196
+2025-07-22 21:40:56,693 - Model - INFO - ---- EVALUATION ----
+2025-07-22 21:41:21,546 - Model - INFO - PARAMETER ...
+2025-07-22 21:41:21,546 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='2025-07-22_21-00', num_point=4096, num_votes=3, test_area=5, visual=False)
+2025-07-22 21:41:21,684 - Model - INFO - The number of test data is: 196
+2025-07-22 21:41:23,101 - Model - INFO - ---- EVALUATION ----
+2025-07-22 21:41:24,482 - Model - INFO - ------- IoU --------
+class not_pipe, IoU: 0.546 
+class pipe, IoU: 0.566 
+
+2025-07-22 21:41:24,482 - Model - INFO - eval point avg class IoU: 0.555936
+2025-07-22 21:41:24,482 - Model - INFO - eval whole scene point avg class acc: 0.734351
+2025-07-22 21:41:24,482 - Model - INFO - eval whole scene point accuracy: 0.714791
+2025-07-22 21:43:01,759 - Model - INFO - PARAMETER ...
+2025-07-22 21:43:01,759 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='2025-07-22_21-00', num_point=4096, num_votes=3, test_area=5, visual=False)
+2025-07-22 21:43:01,888 - Model - INFO - The number of test data is: 196
+2025-07-22 21:43:03,310 - Model - INFO - ---- EVALUATION ----
+2025-07-22 21:43:04,661 - Model - INFO - ------- IoU --------
+class not_pipe, IoU: 0.561 
+class pipe, IoU: 0.568 
+
+2025-07-22 21:43:04,661 - Model - INFO - eval point avg class IoU: 0.564767
+2025-07-22 21:43:04,661 - Model - INFO - eval whole scene point avg class acc: 0.737360
+2025-07-22 21:43:04,661 - Model - INFO - eval whole scene point accuracy: 0.721876

@@ -76,7 +76,7 @@ def main(args):
     BATCH_SIZE = args.batch_size
     NUM_POINT = args.num_point
 
-    root = 'data_utils/'
+    root = 'data_utils/NPY'
 
     TEST_DATASET = CustomPointDataset(split='test', data_root=root, num_point=NUM_POINT, test_range=(241, 300), block_size=1.0, sample_rate=1.0, transform=None)
     log_string("The number of test data is: %d" % len(TEST_DATASET))

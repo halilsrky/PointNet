@@ -76,7 +76,7 @@ def main(args):
     BATCH_SIZE = args.batch_size
     NUM_POINT = args.num_point
 
-    root = 'data_utils/'
+    root = 'data_utils/NPY'
 
     TEST_DATASET = CustomPointDataset(split='test', data_root=root, num_point=NUM_POINT, test_range=(241, 300), block_size=1.0, sample_rate=1.0, transform=None)
     log_string("The number of test data is: %d" % len(TEST_DATASET))
@@ -112,22 +112,18 @@ def main(args):
             batch_label = target.cpu().data.numpy()
             # Her batch'teki tahminleri X Y Z ile birlikte dosyaya kaydet
             batch_size = pred_label.shape[0]
-            # Orijinal X Y Z'yi almak için test dosyasını yükle
             for b in range(batch_size):
-                if file_idx < len(test_files):
-                    xyz_file = os.path.join(root, test_files[file_idx])
-                    xyz_data = np.load(xyz_file)  # [N, 4] (X Y Z label)
-                    xyz = xyz_data[:, :3]
-                    pred = pred_label[b]
-                    out = np.hstack([xyz, pred.reshape(-1, 1)])  # [N, 4] (X Y Z pred_label)
-                    fname = test_files[file_idx].replace('.npy', '_pred.npy')
-                    np.save(pred_dir / fname, out)
+                xyz = points[b].cpu().numpy().T  # shape: [num_point, 3]
+                pred = pred_label[b]            # shape: [num_point]
+                out = np.hstack([xyz, pred.reshape(-1, 1)])  # [num_point, 4]
+                fname = f"batch_{i}_sample_{b}_pred.npy"
+                np.save(pred_dir / fname, out)
                 file_idx += 1
             for l in range(NUM_CLASSES):
                 total_seen_class[l] += np.sum((batch_label == l))
                 total_correct_class[l] += np.sum((pred_label == l) & (batch_label == l))
                 total_iou_deno_class[l] += np.sum(((pred_label == l) | (batch_label == l)))
-        IoU = np.array(total_correct_class) / (np.array(total_iou_deno_class, dtype=np.float32) + 1e-6)
+        IoU = np.array(total_correct_class) / (np.array(total_iou_deno_class, dtype=float) + 1e-6)
         iou_per_class_str = '------- IoU --------\n'
         for l in range(NUM_CLASSES):
             iou_per_class_str += 'class %s, IoU: %.3f \n' % (
@@ -136,7 +132,7 @@ def main(args):
         log_string(iou_per_class_str)
         log_string('eval point avg class IoU: %f' % np.mean(IoU))
         log_string('eval whole scene point avg class acc: %f' % (
-            np.mean(np.array(total_correct_class) / (np.array(total_seen_class, dtype=np.float32) + 1e-6))))
+            np.mean(np.array(total_correct_class) / (np.array(total_seen_class, dtype=float) + 1e-6))))
         log_string('eval whole scene point accuracy: %f' % (
                 np.sum(total_correct_class) / float(np.sum(total_seen_class) + 1e-6)))
         print("Done!")

@@ -1,0 +1,29 @@
+2025-07-22 21:45:21,310 - Model - INFO - PARAMETER ...
+2025-07-22 21:45:21,310 - Model - INFO - Namespace(batch_size=16, decay_rate=0.0001, epoch=32, gpu='0', learning_rate=0.001, log_dir=None, lr_decay=0.7, model='pointnet_sem_seg', npoint=4096, optimizer='Adam', step_size=10, test_area=5)
+2025-07-22 21:45:24,673 - Model - INFO - The number of training data is: 4326
+2025-07-22 21:45:24,673 - Model - INFO - The number of test data is: 196
+2025-07-22 21:45:24,729 - Model - INFO - No existing model, starting training from scratch...
+2025-07-22 21:45:24,916 - Model - INFO - **** Epoch 1 (1/32) ****
+2025-07-22 21:45:24,916 - Model - INFO - Learning rate:0.001000
+2025-07-22 21:45:57,724 - Model - INFO - Training mean loss: 0.489037
+2025-07-22 21:45:57,726 - Model - INFO - Training accuracy: 0.808030
+2025-07-22 21:45:57,726 - Model - INFO - Save model...
+2025-07-22 21:45:57,726 - Model - INFO - Saving at log/sem_seg/2025-07-22_21-45/checkpoints/model.pth
+2025-07-22 21:45:57,807 - Model - INFO - Saving model....
+2025-07-22 21:45:57,818 - Model - INFO - ---- EPOCH 001 EVALUATION ----
+2025-07-22 21:45:58,570 - Model - INFO - eval mean loss: 0.358723
+2025-07-22 21:45:58,571 - Model - INFO - eval point avg class IoU: 0.721570
+2025-07-22 21:45:58,571 - Model - INFO - eval point accuracy: 0.838278
+2025-07-22 21:45:58,571 - Model - INFO - eval point avg class acc: 0.850353
+2025-07-22 21:45:58,571 - Model - INFO - ------- IoU --------
+class not_pipe       weight: 0.438, IoU: 0.723 
+class pipe           weight: 0.562, IoU: 0.720 
+
+2025-07-22 21:45:58,571 - Model - INFO - Eval mean loss: 0.358723
+2025-07-22 21:45:58,571 - Model - INFO - Eval accuracy: 0.838278
+2025-07-22 21:45:58,571 - Model - INFO - Save model...
+2025-07-22 21:45:58,571 - Model - INFO - Saving at log/sem_seg/2025-07-22_21-45/checkpoints/best_model.pth
+2025-07-22 21:45:58,653 - Model - INFO - Saving model....
+2025-07-22 21:45:58,653 - Model - INFO - Best mIoU: 0.721570
+2025-07-22 21:45:58,653 - Model - INFO - **** Epoch 2 (2/32) ****
+2025-07-22 21:45:58,653 - Model - INFO - Learning rate:0.001000
